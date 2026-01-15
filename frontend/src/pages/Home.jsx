@@ -11,7 +11,7 @@ const Home = ({ cart, setCart }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch("http://localhost:3001/api/products");
+        const res = await fetch(" https://ecommerce-tzmo.onrender.com");
         if (!res.ok) throw new Error("Failed to fetch");
         const data = await res.json();
         setProducts(data);
