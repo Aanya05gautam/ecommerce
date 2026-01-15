@@ -186,6 +186,14 @@ http://localhost:5000
 
 ---
 
+
+## 🌐 Live Demo
+
+- **Frontend:** [E-commerce Frontend](https://ecommerce-frontend-ljqe.onrender.com)
+- **Backend API:** [E-commerce Backend API](https://ecommerce-tzmo.onrender.com/api/products)
+
+
+
 ## 👩‍💻 Author
 
 
