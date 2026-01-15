@@ -10,9 +10,12 @@ dotenv.config();
 
 const app = express();
 
+// Replace with your frontend Render URL
+const frontendURL = "https://ecommerce-frontend-ljqe.onrender.com";
+
 // CORS configuration
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: frontendURL,
   credentials: true
 }));
 
@@ -36,3 +39,4 @@ connectDB().then(() => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
