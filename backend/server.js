@@ -12,7 +12,7 @@ dotenv.config();
 const app = express();
 
 // Replace with your frontend Render URL
-const frontendURL = "https://ecommerce-frontend-ljqe.onrender.com";
+const frontendURL = "https://ecommerce-frontend-seven-pied.vercel.app";
 
 // CORS configuration
 app.use(cors({
@@ -42,5 +42,11 @@ connectDB().then(() => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+// Only listen if not imported (for local dev)
+if (process.env.NODE_ENV !== "production") {
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
+
+export default app;
 
