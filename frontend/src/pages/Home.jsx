@@ -49,6 +49,9 @@ const Home = ({ cart, setCart }) => {
         </div>
         <h3 className="text-xl font-bold text-slate-900 mb-2">Connection Error</h3>
         <p className="text-slate-500 mb-6">{error}</p>
+        <p className="text-xs text-slate-400 font-mono mb-4 bg-slate-100 p-2 rounded">
+            DEBUG: API_URL is "{import.meta.env.VITE_API_URL || 'UNDEFINED'}"
+        </p>
         <button onClick={() => window.location.reload()} className="px-6 py-2 bg-slate-900 text-white rounded-lg font-bold hover:bg-black transition">Retry</button>
       </div>
     </div>
