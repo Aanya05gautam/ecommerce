@@ -82,4 +82,4 @@ The app will launch at `http://localhost:5173`!
 
 ---
 
-Made with ❤️ by [Aksha]
+Made with ❤️ by Aanya Gautam
