@@ -1,200 +1,85 @@
-# 🛒 Full Stack E-Commerce Website (MERN Stack)
+# 🛍️ ShopHub - Premium E-Commerce Experience
 
-A modern **full‑stack E‑Commerce web application** built using the **MERN stack**. This project demonstrates real‑world implementation of backend APIs, database integration, authentication, and a responsive frontend UI.
+A modern, full-stack e-commerce application built with the **MERN Stack** (MongoDB, Express, React, Node.js). 
+Featuring a stunning UI, real-time payment integration, and gamified engagement features.
 
----
+## ✨ Features
 
-## 🚀 Features
+### 🎨 User Interface
+- **Modern Design**: Glassmorphism effects, smooth gradients, and micro-interactions.
+- **Responsive**: Fully optimized for desktop, tablet, and mobile.
+- **Dynamic Home Page**: Hero section with video backgrounds, flash sale countdowns, and "New Arrivals".
 
-### 🧑‍💻 User Features
+### 🛒 Shopping Experience
+- **Product Catalog**: Extensive categories (Electronics, Fashion, Home, Sports, etc.).
+- **Smart Cart**: Coupon code system, dynamic quantity updates, and instant price calculation.
+- **Search & Filter**: Real-time product search and category filtering.
 
-* User registration & login (Authentication)
-* Browse products with images, price & category
-* Add products to cart
-* View cart items
-* Responsive UI for desktop & mobile
+### 🎡 Engagement & Rewards
+- **Spin & Win**: Gamified "Spin the Wheel" feature to win real discount coupons.
+- **Flash Sales**: Countdown timers for special limited-time offers.
+- **Coupons**: Apply codes like `SAVE10` or `FREESHIP` for discounts.
 
-### 🛠️ Admin / Backend Features
-
-* RESTful APIs using Express.js
-* MongoDB database integration using Mongoose
-* Product CRUD functionality
-* Sample product generation
-* Secure authentication logic
-
----
-
-## 🧰 Tech Stack
-
-### Frontend
-
-* ⚛️ React (Vite)
-* 🎨 Tailwind CSS
-* 🔀 React Router DOM
-* 🌐 Axios
-
-### Backend
-
-* 🟢 Node.js
-* 🚂 Express.js
-* 🍃 MongoDB + Mongoose
-* 🔐 JWT Authentication
-
-### Tools
-
-* Git & GitHub
-* Postman (API testing)
-* VS Code
+### 💳 Payments & Security
+- **Secure Checkout**: Integrated **Stripe** for secure credit/debit card processing.
+- **Mock Payment Mode**: Built-in simulator for testing payments without real cards (supports UPI & Cards).
+- **Authentication**: Secure JWT-based login and registration.
 
 ---
 
-## 📂 Project Structure
+## 🛠️ Tech Stack
 
-```
-ecommerce/
-│
-├── backend/
-│   ├── config/
-│   │   └── db.js
-│   ├── controllers/
-│   │   ├── authController.js
-│   │   └── productController.js
-│   ├── models/
-│   │   ├── user.js
-│   │   └── Products.js
-│   ├── routes/
-│   │   ├── authRoutes.js
-│   │   └── productRoutes.js
-│   ├── server.js
-│   └── package.json
-│
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   │   └── Navbar.jsx
-│   │   ├── pages/
-│   │   │   ├── Home.jsx
-│   │   │   ├── Cart.jsx
-│   │   │   └── Login.jsx
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   └── package.json
-│
-└── README.md
-```
+- **Frontend**: React.js, Vite, Tailwind CSS, Lucide Icons
+- **Backend**: Node.js, Express.js
+- **Database**: MongoDB
+- **Payments**: Stripe API
+- **State Management**: React Context / Hooks
 
 ---
 
-## ⚙️ Installation & Setup
+## 🚀 Getting Started
 
-### 1️⃣ Clone the Repository
-
+### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/Aanya05gautam/ecommerce.git
 cd ecommerce
 ```
 
-### 2️⃣ Backend Setup
-
+### 2. Setup Backend
 ```bash
 cd backend
 npm install
 ```
-
-Create a `.env` file in backend folder:
-
-```
+Create a `.env` file in the `backend` folder:
+```env
+PORT=3001
 MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_secret_key
-PORT=5000
+JWT_SECRET=your_jwt_secret
+STRIPE_SECRET_KEY=your_stripe_secret_key_or_placeholder
 ```
-
-Run backend server:
-
+Start the server:
 ```bash
 npm run dev
 ```
 
----
-
-### 3️⃣ Frontend Setup
-
+### 3. Setup Frontend
+Open a new terminal:
 ```bash
-cd ../frontend
+cd frontend
 npm install
 npm run dev
 ```
 
-Frontend runs on:
-
-```
-http://localhost:5173
-```
-
-Backend runs on:
-
-```
-http://localhost:5000
-```
+The app will launch at `http://localhost:5173`!
 
 ---
 
-## 🔗 API Endpoints
-
-### Products
-
-* `GET /api/products` → Get all products
-* `GET /api/products/:id` → Get product by ID
-
-### Authentication
-
-* `POST /api/auth/register` → Register user
-* `POST /api/auth/login` → Login user
+## 🔮 Future Improvements
+- [ ] Admin Dashboard for product management
+- [ ] User Reviews and Ratings
+- [ ] Wishlist functionality
+- [ ] Order History tracking
 
 ---
 
-## 📸 Screenshots
-
-<img width="1133" height="581" alt="Screenshot 2026-01-15 145447" src="https://github.com/user-attachments/assets/2f8012de-d9cf-4173-8e0a-57e424a5b18b" />
-
-<img width="1096" height="774" alt="Screenshot 2026-01-15 145425" src="https://github.com/user-attachments/assets/eef59f50-3e08-4dcb-90e2-abdd5000a086" />
-
-<img width="1001" height="702" alt="Screenshot 2026-01-15 145501" src="https://github.com/user-attachments/assets/31378e22-cfaf-496f-ada6-08c74d65bf22" />
-
-
-
----
-
-## 📈 What I Learned
-
-* Building REST APIs with Express
-* MongoDB schema design using Mongoose
-* Connecting frontend & backend
-* Authentication using JWT
-* Structuring scalable MERN projects
-* Using Git & GitHub professionally
-
----
-
-## 🌱 Future Improvements
-
-* Payment gateway integration
-* Admin dashboard
-* Product filtering & search
-* Order history
-* Wishlist feature
-
----
-
-## 👩‍💻 Author
-
-
-**Aanya Gautam**
-
-B.Tech CSE Student
-
-
-
----
-
-⭐ If you like this project, give it a star on GitHub!
+Made with ❤️ by [Aksha]
