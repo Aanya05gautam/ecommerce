@@ -235,7 +235,8 @@ const Checkout = () => {
 
   useEffect(() => {
     if (total > 0) {
-      fetch(`${import.meta.env.VITE_API_URL}/api/payment/create-payment-intent`, {
+      const API_URL = import.meta.env.VITE_API_URL.replace(/\/$/, "");
+      fetch(`${API_URL}/api/payment/create-payment-intent`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ amount: Math.round(total * 100) }),
