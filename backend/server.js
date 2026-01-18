@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import productRoutes from "./routes/productRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
+import paymentRoutes from "./routes/paymentRoutes.js";
 import { createSampleProducts } from "./controllers/productController.js";
 
 dotenv.config();
@@ -15,7 +16,7 @@ const frontendURL = "https://ecommerce-frontend-ljqe.onrender.com";
 
 // CORS configuration
 app.use(cors({
-  origin: frontendURL,
+  origin: ["http://localhost:5173", frontendURL],
   credentials: true
 }));
 
@@ -28,6 +29,9 @@ app.get("/test", (req, res) => {
 
 // Auth API
 app.use("/api/auth", authRoutes);
+
+// Payment API
+app.use("/api/payment", paymentRoutes);
 
 // Product API
 app.use("/api/products", productRoutes);

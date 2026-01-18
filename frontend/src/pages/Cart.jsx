@@ -1,10 +1,47 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Ticket, Check } from "lucide-react";
 
 const Cart = ({ cart, setCart }) => {
+  const navigate = useNavigate();
   const [quantities, setQuantities] = useState(
     cart.reduce((acc, item, idx) => ({ ...acc, [idx]: 1 }), {})
   );
+  const [coupon, setCoupon] = useState("");
+  const [discount, setDiscount] = useState(0);
+  const [appliedCoupon, setAppliedCoupon] = useState(null);
+
+  const applyCoupon = () => {
+    if (!coupon) return;
+    const code = coupon.toUpperCase();
+    
+    // Simulate API check
+    const validCoupons = {
+        'SAVE10': 0.10,
+        'SAVE15': 0.15,
+        'SAVE20': 0.20,
+        'SAVE5': 0.05,
+        'FREESHIP': 'FS'
+    };
+
+    if (validCoupons[code]) {
+        setAppliedCoupon({ code, value: validCoupons[code] });
+        if (validCoupons[code] === 'FS') {
+           setDiscount(0); // Handled in shipping logic
+        } else {
+           const sub = calculateSubtotal();
+           setDiscount(sub * validCoupons[code]);
+        }
+    } else {
+        alert("Invalid coupon code");
+    }
+  };
+
+  const removeCoupon = () => {
+      setAppliedCoupon(null);
+      setDiscount(0);
+      setCoupon("");
+  };
 
   const updateQuantity = (index, newQuantity) => {
     if (newQuantity > 0) {
@@ -24,9 +61,12 @@ const Cart = ({ cart, setCart }) => {
   };
 
   const subtotal = calculateSubtotal();
-  const tax = subtotal * 0.1;
-  const shipping = subtotal > 100 ? 0 : 10;
-  const total = subtotal + tax + shipping;
+  // Recalculate discount if items changed
+  const currentDiscount = appliedCoupon && appliedCoupon.value !== 'FS' ? subtotal * appliedCoupon.value : 0;
+  
+  const tax = (subtotal - currentDiscount) * 0.1;
+  const shipping = (subtotal - currentDiscount) > 100 || (appliedCoupon && appliedCoupon.value === 'FS') ? 0 : 10;
+  const total = subtotal - currentDiscount + tax + shipping;
 
   const clearCart = () => {
     if (window.confirm("Are you sure you want to clear your cart?")) {
@@ -177,6 +217,13 @@ const Cart = ({ cart, setCart }) => {
                   <span className="font-semibold">${subtotal.toFixed(2)}</span>
                 </div>
 
+                {appliedCoupon && appliedCoupon.value !== 'FS' && (
+                    <div className="flex justify-between text-emerald-600 pb-3 border-b border-slate-200">
+                        <span className="font-medium">Discount ({appliedCoupon.value * 100}%)</span>
+                        <span className="font-semibold">-${currentDiscount.toFixed(2)}</span>
+                    </div>
+                )}
+
                 {/* Tax */}
                 <div className="flex justify-between text-slate-600 pb-3 border-b border-slate-200">
                   <span className="font-medium">Tax (10%)</span>
@@ -198,9 +245,43 @@ const Cart = ({ cart, setCart }) => {
                 {/* Shipping Hint */}
                 {shipping > 0 && (
                   <p className="text-xs text-slate-600 bg-slate-100 p-3 rounded-lg border border-slate-200">
-                    💡 Add ${(100 - subtotal).toFixed(2)} more for free shipping
+                    💡 Add ${(100 - (subtotal - currentDiscount)).toFixed(2)} more for free shipping
                   </p>
                 )}
+
+                {/* Coupon Input */}
+                <div className="pt-2">
+                    {!appliedCoupon ? (
+                        <div className="flex gap-2">
+                            <input
+                                type="text"
+                                value={coupon}
+                                onChange={(e) => setCoupon(e.target.value)}
+                                placeholder="Coupon Code"
+                                className="flex-1 px-4 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 uppercase"
+                            />
+                            <button 
+                                onClick={applyCoupon}
+                                className="px-4 py-2 bg-slate-900 text-white rounded-lg text-sm font-bold hover:bg-black transition"
+                            >
+                                Apply
+                            </button>
+                        </div>
+                    ) : (
+                        <div className="flex items-center justify-between bg-emerald-50 border border-emerald-200 p-3 rounded-lg">
+                            <div className="flex items-center gap-2 text-emerald-700">
+                                <Ticket size={16} />
+                                <span className="font-bold text-sm tracking-wide">{appliedCoupon.code} Applied</span>
+                            </div>
+                            <button 
+                                onClick={removeCoupon}
+                                className="text-xs font-bold text-red-500 hover:text-red-700 underline"
+                            >
+                                Remove
+                            </button>
+                        </div>
+                    )}
+                </div>
               </div>
 
               {/* Total */}
@@ -214,7 +295,10 @@ const Cart = ({ cart, setCart }) => {
               </div>
 
               {/* Checkout Button */}
-              <button className="w-full bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-900 hover:to-black text-white py-4 rounded-xl font-bold text-lg transition-all transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl">
+              <button 
+                onClick={() => navigate('/checkout', { state: { total } })}
+                className="w-full bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-900 hover:to-black text-white py-4 rounded-xl font-bold text-lg transition-all transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
+              >
                 Proceed to Checkout
               </button>
 
