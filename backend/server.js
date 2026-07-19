@@ -11,8 +11,7 @@ dotenv.config();
 
 const app = express();
 
-// Replace with your frontend Render URL
-const frontendURL = "https://ecommerce-frontend-seven-pied.vercel.app";
+const frontendURL = "https://shophubfrontend-five.vercel.app";
 
 // CORS configuration
 app.use(cors({
