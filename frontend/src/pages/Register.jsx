@@ -18,7 +18,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const API_URL = import.meta.env.VITE_API_URL.replace(/\/$/, "");
+      const API_URL = (import.meta.env.VITE_API_URL || "http://localhost:3001").replace(/\/$/, "");
       const response = await fetch(`${API_URL}/api/auth/register`, {
         method: "POST",
         headers: {

@@ -14,7 +14,7 @@ const Home = ({ cart, setCart }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const API_URL = import.meta.env.VITE_API_URL.replace(/\/$/, "");
+        const API_URL = (import.meta.env.VITE_API_URL || "http://localhost:3001").replace(/\/$/, "");
         const res = await fetch(`${API_URL}/api/products`);
         if (!res.ok) throw new Error("Failed to fetch");
         const data = await res.json();

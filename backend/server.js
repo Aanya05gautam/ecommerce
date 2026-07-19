@@ -22,6 +22,14 @@ app.use(cors({
 
 app.use(express.json());
 
+// Health/root route
+app.get("/", (req, res) => {
+  res.json({
+    message: "ShopHub backend is running",
+    endpoints: ["/test", "/api/products", "/api/auth", "/api/payment"]
+  });
+});
+
 // Test route
 app.get("/test", (req, res) => {
   res.send("Server is working!");
@@ -36,9 +44,13 @@ app.use("/api/payment", paymentRoutes);
 // Product API
 app.use("/api/products", productRoutes);
 
-// Connect to MongoDB and create sample products
-connectDB().then(() => {
-  createSampleProducts();
+// Connect to MongoDB and create sample products when available
+connectDB().then((connected) => {
+  if (connected) {
+    createSampleProducts();
+  } else {
+    console.log("Running without database. Fallback product data will be used.");
+  }
 });
 
 const PORT = process.env.PORT || 5000;

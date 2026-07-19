@@ -16,7 +16,7 @@ export default function Login({ setUser }) {
     setLoading(true);
 
     try {
-      const API_URL = import.meta.env.VITE_API_URL.replace(/\/$/, "");
+      const API_URL = (import.meta.env.VITE_API_URL || "http://localhost:3001").replace(/\/$/, "");
       const response = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
         headers: {

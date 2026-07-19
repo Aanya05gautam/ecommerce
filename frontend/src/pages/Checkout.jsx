@@ -235,7 +235,7 @@ const Checkout = () => {
 
   useEffect(() => {
     if (total > 0) {
-      const API_URL = import.meta.env.VITE_API_URL.replace(/\/$/, "");
+      const API_URL = (import.meta.env.VITE_API_URL || "http://localhost:3001").replace(/\/$/, "");
       fetch(`${API_URL}/api/payment/create-payment-intent`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
